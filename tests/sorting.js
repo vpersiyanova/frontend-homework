@@ -120,4 +120,46 @@ QUnit.module('Тестируем функцию sorting', function () {
 
 		assert.deepEqual(actual, expected);
 	});
+
+	QUnit.test('sorting сортирует русские строки по нескольким полям', function (assert) {
+		const initial = [
+			{prop1: 3, id: 'а'},
+			{prop1: 4, id: 'а'},
+			{prop1: 1, id: 'ееее'},
+			{prop1: 1, id: 'фыр'},
+			{prop1: 2, id: 'ооо'},
+			{prop1: 4, id: 'жжж'},
+			{prop1: 3, id: 'рр'},
+			{prop1: 2, id: 'рр'},
+		];
+		const actual = sorting(initial, ['id', 'prop1']);
+
+		const expected = [
+			{prop1: 3, id: 'а'},
+			{prop1: 4, id: 'а'},
+			{prop1: 1, id: 'ееее'},
+			{prop1: 4, id: 'жжж'},
+			{prop1: 2, id: 'ооо'},
+			{prop1: 2, id: 'рр'},
+			{prop1: 3, id: 'рр'},
+			{prop1: 1, id: 'фыр'},
+		];
+
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting сортировка Е и Ё', function (assert) {
+		const initial = [
+			{prop1: 1, id: 'ё'},
+			{prop1: 2, id: 'е'},
+		];
+		const actual = sorting(initial, ['id']);
+
+		const expected = [
+			{prop1: 2, id: 'е'},
+			{prop1: 1, id: 'ё'},
+		];
+
+		assert.deepEqual(actual, expected);
+	});
 });
