@@ -13,8 +13,8 @@ const sorting = (arrayOfObj, arrayOfProp) => {
 
   let currentProp, previousProp;
 
-  arrayOfProp.forEach(function(item, i, arrayOfProp) {
-    currentProp = item;
+  arrayOfProp.forEach((property, i, arrayOfProp) => {
+    currentProp = property;
     previousProp = arrayOfProp[i-1];
     arrayOfObj.sort(sortFunc);
   })
